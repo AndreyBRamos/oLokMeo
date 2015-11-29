@@ -4,19 +4,27 @@ See LICENSE.TXT*/
 
 // Ryan Pridgeon COM2032 rp00091
 
+
+// Compilação windows 
 #include <cmath>
 #include <cstdlib>
+
 #ifdef _WIN32
 #include <Windows.h>
-#endif
 #include <gl\gl.h>
 #include <gl\glut.h>
 #include <GL\glu.h>
+
+#else
+#include <GL/gl.h>
+#include <GL/glut.h>
+#endif
 
 #include "tga.h"
 #include "solarsystem.h"
 #include "camera.h"
 #include "globals.h"
+
 
 // the screen size
 int screenWidth, screenHeight;

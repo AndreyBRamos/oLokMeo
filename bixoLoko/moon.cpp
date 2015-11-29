@@ -9,10 +9,16 @@ See LICENSE.TXT*/
 
 #ifdef _WIN32
 #include <Windows.h>
-#endif
 #include <gl\GL.h>
 #include <gl\GLU.h>
 #include <gl\glut.h>
+
+#else
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <GL/glut.h>
+#endif
+
 #include "globals.h"
 
 Moon::Moon(float distanceFromPlanet, float orbitTime, float rotationTime, float radius, GLuint textureHandle)

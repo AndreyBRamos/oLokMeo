@@ -9,8 +9,11 @@ See LICENSE.TXT*/
 
 #ifdef _WIN32
 #include <Windows.h>
-#endif
 #include <gl\GL.h>
+#else
+#include <GL/gl.h>
+#endif
+
 #include <vector>
 #include "moon.h"
 
