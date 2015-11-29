@@ -17,3 +17,5 @@ OK - Remover todos os planetas, deixar o Sol, a Terra, a Lua e mais 2 planetas(u
  - Procurar outro arquivo para fazer a textura dos planetas e do fundo, pra originalizar
 
  - Achar alguma textura pra nave, a nave pode ser redonda, dai podemos trabalhar como se ela fosse um planeta, mas botamos umas textura de metal
+
+ - Fazer a lua manter a mesma face virada para a terra quanto gira ao seu redor
