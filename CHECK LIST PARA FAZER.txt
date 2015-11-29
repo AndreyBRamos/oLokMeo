@@ -1,0 +1,19 @@
+OK - Remover o Help
+
+ - Remover as funções do teclado desnecessárias
+//Em partes to tirando, quando terminar todas desnecessárias coloco o OK :)
+
+OK - Remover a linha das orbitas dos planetas
+
+OK - Aumentar a velocidade do planeta andar pela orbita
+
+OK - Remover todos os planetas, deixar o Sol, a Terra, a Lua e mais 2 planetas(um antes e um depois da terra!)
+//deixei na sequencia, Sol, Mercurio, Venus, Terra(lua) e Marte, só comentei, depois vemos  certo qual deixar o resto remover o codigo
+
+ - Aumentar os planetas em comparação ao Sol (ja que o tamanho deles não importa muito)
+
+ - Fazer a camera ir para trás atraves de alguma tecla do teclado e posicionar a câmera na visão de "deus", deve ser alguma rotação do ponto de vista da    câmera, a gente ja faz essa rotação com alguma tecla quando anda com a nave, é só fixar a camera la em cima
+
+ - Procurar outro arquivo para fazer a textura dos planetas e do fundo, pra originalizar
+
+ - Achar alguma textura pra nave, a nave pode ser redonda, dai podemos trabalhar como se ela fosse um planeta, mas botamos umas textura de metal
