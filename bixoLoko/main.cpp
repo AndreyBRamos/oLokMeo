@@ -27,7 +27,7 @@ See LICENSE.TXT*/
 
 
 // the screen size
-int screenWidth, screenHeight;
+int telaLargura, telaAltura;
 
 // The TGA texture containing the help dialogue and starfield and moon texture
 TGA* help, *stars, * moon;
@@ -39,14 +39,14 @@ bool helpDialogue = true;
 int planetSelected = 1;
 
 // The main instance of the solar system
-SolarSystem solarSystem;
+SolarSystem sistemaSolar;
 
 // The instance of the camera
 Camera camera;
 
 // These control the simulation of time
 double time;
-double timeSpeed;
+double velocidadeTempo;
 
 // holds the state of the controls for the camera - when true, the key for that control is being pressed
 struct ControlStates
@@ -73,10 +73,10 @@ float random(float max)
 void addMoon()
 {
 	// make a moon using random values
-	solarSystem.addMoon(planetSelected, 
-		(500 + random(1500)) * solarSystem.getRadiusOfPlanet(planetSelected),
+	sistemaSolar.addMoon(planetSelected, 
+		(500 + random(1500)) * sistemaSolar.getRadiusOfPlanet(planetSelected),
 		10 + random(100), 0.5 + random(20),
-		solarSystem.getRadiusOfPlanet(planetSelected) * (0.05f + random(0.2f)), moon->getTextureHandle());
+		sistemaSolar.getRadiusOfPlanet(planetSelected) * (0.05f + random(0.2f)), moon->getTextureHandle());
 }
 
 void init(void)
@@ -116,34 +116,34 @@ void init(void)
 	stars = new TGA("images/stars.tga");
 	moon = new TGA("images/moon.tga");
 
-	TGA* sun = new TGA("images/sun.tga");
-	TGA* mercury = new TGA("images/mercury.tga");
+	TGA* sol = new TGA("images/sun.tga");
+	TGA* mercurio = new TGA("images/mercury.tga");
 	TGA* venus = new TGA("images/venus.tga");
-	TGA* earth = new TGA("images/earth.tga");
-	TGA* mars = new TGA("images/mars.tga");
+	TGA* terra = new TGA("images/earth.tga");
+	TGA* marte = new TGA("images/mars.tga");
 	TGA* jupiter = new TGA("images/jupiter.tga");
-	TGA* saturn = new TGA("images/saturn.tga");
-	TGA* uranus = new TGA("images/uranus.tga");
-	TGA* neptune = new TGA("images/neptune.tga");
-	TGA* pluto = new TGA("images/pluto.tga");
+	TGA* saturno = new TGA("images/saturn.tga");
+	TGA* urano = new TGA("images/uranus.tga");
+	TGA* netuno = new TGA("images/neptune.tga");
+	TGA* plutao = new TGA("images/pluto.tga");
 
-	// Add all the planets with accurate data. Distance measured in km, time measured in earth days.
-	solarSystem.addPlanet(0, 1, 500, 695500, sun->getTextureHandle()); // sun
-	solarSystem.addPlanet(57910000, 88, 58.6, 2440, mercury->getTextureHandle()); // mercury
-	solarSystem.addPlanet(108200000, 224.65, 243, 6052, venus->getTextureHandle()); // venus
-	solarSystem.addPlanet(149600000, 365, 1, 6371, earth->getTextureHandle()); // earth
-	solarSystem.addPlanet(227939100, 686, 1.03f, 3389, mars->getTextureHandle()); // mars
-	/*solarSystem.addPlanet(778500000, 4332, 0.4139, 69911, jupiter->getTextureHandle()); // jupiter
-	solarSystem.addPlanet(1433000000, 10759, 0.44375, 58232, saturn->getTextureHandle()); // saturn
-	solarSystem.addPlanet(2877000000, 30685, 0.718056, 25362, uranus->getTextureHandle()); // uranus
-	solarSystem.addPlanet(4503000000, 60188, 0.6713, 24622, neptune->getTextureHandle()); // neptune
-	solarSystem.addPlanet(5906380000, 90616, 6.39, 1137, pluto->getTextureHandle()); // pluto*/
+	// Add all the planets with accurate data. Distance measured in km, time measured in terra days.
+	sistemaSolar.addPlanet(0, 1, 500, 695500, sol->getTextureHandle()); // sol
+	sistemaSolar.addPlanet(57910000, 88, 58.6, 2440, mercurio->getTextureHandle()); // mercurio
+	sistemaSolar.addPlanet(108200000, 224.65, 243, 6052, venus->getTextureHandle()); // venus
+	sistemaSolar.addPlanet(149600000, 365, 1, 6371, terra->getTextureHandle()); // terra
+	sistemaSolar.addPlanet(227939100, 686, 1.03f, 3389, marte->getTextureHandle()); // marte
+	/*sistemaSolar.addPlanet(778500000, 4332, 0.4139, 69911, jupiter->getTextureHandle()); // jupiter
+	sistemaSolar.addPlanet(1433000000, 10759, 0.44375, 58232, saturno->getTextureHandle()); // saturno
+	sistemaSolar.addPlanet(2877000000, 30685, 0.718056, 25362, urano->getTextureHandle()); // urano
+	sistemaSolar.addPlanet(4503000000, 60188, 0.6713, 24622, netuno->getTextureHandle()); // netuno
+	sistemaSolar.addPlanet(5906380000, 90616, 6.39, 1137, plutao->getTextureHandle()); // plutao*/
 
-	solarSystem.addMoon(3, 7000000, 27.3, 27.3, 1738, moon->getTextureHandle()); // test moon for the earth
+	sistemaSolar.addMoon(3, 7000000, 27.3, 27.3, 1738, moon->getTextureHandle()); // test moon for the terra
 
 	// set up time
 	time = 2.552f;
-	timeSpeed = 5.0f;
+	velocidadeTempo = 5.0f;
 
 	// reset controls
 	controls.forward = false;
@@ -165,8 +165,8 @@ void drawCube(void);
 void display(void)
 {
 	// update the logic and simulation
-	time += timeSpeed;
-	solarSystem.calculatePositions(time);
+	time += velocidadeTempo;
+	sistemaSolar.calculatePositions(time);
 
 	if (controls.forward) camera.forward();		if (controls.backward) camera.backward();
 	if (controls.left) camera.left();			if (controls.right) camera.right();
@@ -182,7 +182,7 @@ void display(void)
 	// set up the perspective matrix for rendering the 3d world
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(70.0f, (float)screenWidth / (float)screenHeight, 0.001f, 500.0f);
+	gluPerspective(70.0f, (float)telaLargura / (float)telaAltura, 0.001f, 500.0f);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	
@@ -206,19 +206,19 @@ void display(void)
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
 
-	solarSystem.render();
+	sistemaSolar.render();
 	glDisable(GL_LIGHTING);
 
 	// possibly render orbits
 	/*if (showOrbits)
-		solarSystem.renderOrbits();*/
+		sistemaSolar.renderOrbits();*/
 	
 	glDisable(GL_DEPTH_TEST);
 
 	// set up ortho matrix for showing the UI (help dialogue)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluOrtho2D(0.0, (GLdouble) screenWidth, (GLdouble) screenHeight, 0.0);
+	gluOrtho2D(0.0, (GLdouble) telaLargura, (GLdouble) telaAltura, 0.0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	
@@ -244,7 +244,7 @@ void keyDown(unsigned char key, int x, int y)
 	{
 		// point at the specified planet
 		float vec[3];
-		solarSystem.getPlanetPosition(key - '0', vec);
+		sistemaSolar.getPlanetPosition(key - '0', vec);
 		camera.pointAt(vec);
 
 		// select that planet
@@ -253,19 +253,19 @@ void keyDown(unsigned char key, int x, int y)
 	switch (key)
 	{
 	case '-':
-		timeSpeed /= 2.0f; // half the rate of time passing
+		velocidadeTempo /= 2.0f; // half the rate of time passing
 		break;
 	case '=':
-		timeSpeed *= 2.0f; // double the rate of time passing
+		velocidadeTempo *= 2.0f; // double the rate of time passing
 		break;
 	/*case 'h':
 		helpDialogue = !helpDialogue; // toggle the dialogue
 		break;*/
 	case '[':
-		planetSizeScale /= 1.2; // make planet scale smaller
+		escalaTamanhoPlaneta /= 1.2; // make planet scale smaller
 		break;
 	case ']':
-		planetSizeScale *= 1.2; // make planet scale bigger
+		escalaTamanhoPlaneta *= 1.2; // make planet scale bigger
 		break;
 	/*case 'o':
 		showOrbits = !showOrbits; // toggle show orbits
@@ -274,7 +274,7 @@ void keyDown(unsigned char key, int x, int y)
 		addMoon(); // add a moon to the selected planet
 		break;
 	case 'r':
-		planetSizeScale = distanceScale;
+		escalaTamanhoPlaneta = distanceScale;
 		break;
 	case ',':
 		camera.slowDown(); // slow down camera
@@ -356,8 +356,8 @@ void keyUp(unsigned char key, int x, int y)
 
 void reshape(int w, int h)
 {
-	screenWidth = w;
-	screenHeight = h;
+	telaLargura = w;
+	telaAltura = h;
 	glViewport (0, 0, (GLsizei) w, (GLsizei) h);
 }
 
@@ -380,36 +380,84 @@ int main(int argc, char** argv)
 void drawCube(void)
 {
 	glBegin(GL_QUADS);
-	// new face
-	glTexCoord2f(0.0f, 0.0f);	glVertex3f(-1.0f, -1.0f, 1.0f);
-	glTexCoord2f(1.0f, 0.0f);	glVertex3f(1.0f, -1.0f, 1.0f);
-	glTexCoord2f(1.0f, 1.0f);	glVertex3f(1.0f, 1.0f, 1.0f);
-	glTexCoord2f(0.0f, 1.0f);	glVertex3f(-1.0f, 1.0f, 1.0f);
-	// new face
-	glTexCoord2f(0.0f, 0.0f);	glVertex3f(1.0f, 1.0f, 1.0f);
-	glTexCoord2f(1.0f, 0.0f);	glVertex3f(1.0f, 1.0f, -1.0f);
-	glTexCoord2f(1.0f, 1.0f);	glVertex3f(1.0f, -1.0f, -1.0f);
-	glTexCoord2f(0.0f, 1.0f);	glVertex3f(1.0f, -1.0f, 1.0f);
-	// new face
-	glTexCoord2f(0.0f, 0.0f);	glVertex3f(1.0f, 1.0f, -1.0f);
-	glTexCoord2f(1.0f, 0.0f);	glVertex3f(-1.0f, 1.0f, -1.0f);
-	glTexCoord2f(1.0f, 1.0f);	glVertex3f(-1.0f, -1.0f, -1.0f);
-	glTexCoord2f(0.0f, 1.0f);	glVertex3f(1.0f, -1.0f, -1.0f);
-	// new face
-	glTexCoord2f(0.0f, 0.0f);	glVertex3f(-1.0f, -1.0f, -1.0f);
-	glTexCoord2f(1.0f, 0.0f);	glVertex3f(-1.0f, -1.0f, 1.0f);
-	glTexCoord2f(1.0f, 1.0f);	glVertex3f(-1.0f, 1.0f, 1.0f);
-	glTexCoord2f(0.0f, 1.0f);	glVertex3f(-1.0f, 1.0f, -1.0f);
-	// new face
-	glTexCoord2f(0.0f, 0.0f);	glVertex3f(-1.0f, 1.0f, -1.0f);
-	glTexCoord2f(1.0f, 0.0f);	glVertex3f(1.0f, 1.0f, -1.0f);
-	glTexCoord2f(1.0f, 1.0f);	glVertex3f(1.0f, 1.0f, 1.0f);
-	glTexCoord2f(0.0f, 1.0f);	glVertex3f(-1.0f, 1.0f, 1.0f);
-	// new face
-	glTexCoord2f(0.0f, 0.0f);	glVertex3f(-1.0f, -1.0f, -1.0f);
-	glTexCoord2f(1.0f, 0.0f);	glVertex3f(1.0f, -1.0f, -1.0f);
-	glTexCoord2f(1.0f, 1.0f);	glVertex3f(1.0f, -1.0f, 1.0f);
-	glTexCoord2f(0.0f, 1.0f);	glVertex3f(-1.0f, -1.0f, 1.0f);
+	// nova face
+	glTexCoord2f(0.0f, 0.0f);	
+	glVertex3f(-1.0f, -1.0f, 1.0f);
+
+	glTexCoord2f(1.0f, 0.0f);	
+	glVertex3f(1.0f, -1.0f, 1.0f);
+
+	glTexCoord2f(1.0f, 1.0f);	
+	glVertex3f(1.0f, 1.0f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);	
+	glVertex3f(-1.0f, 1.0f, 1.0f);
+
+	// nova face
+	glTexCoord2f(0.0f, 0.0f);	
+	glVertex3f(1.0f, 1.0f, 1.0f);
+
+	glTexCoord2f(1.0f, 0.0f);	
+	glVertex3f(1.0f, 1.0f, -1.0f);
+
+	glTexCoord2f(1.0f, 1.0f);	
+	glVertex3f(1.0f, -1.0f, -1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);	
+	glVertex3f(1.0f, -1.0f, 1.0f);
+
+	// nova face
+	glTexCoord2f(0.0f, 0.0f);	
+	glVertex3f(1.0f, 1.0f, -1.0f);
+
+	glTexCoord2f(1.0f, 0.0f);	
+	glVertex3f(-1.0f, 1.0f, -1.0f);
+
+	glTexCoord2f(1.0f, 1.0f);	
+	glVertex3f(-1.0f, -1.0f, -1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);	
+	glVertex3f(1.0f, -1.0f, -1.0f);
+
+	// nova face
+	glTexCoord2f(0.0f, 0.0f);	
+	glVertex3f(-1.0f, -1.0f, -1.0f);
+
+	glTexCoord2f(1.0f, 0.0f);	
+	glVertex3f(-1.0f, -1.0f, 1.0f);
+
+	glTexCoord2f(1.0f, 1.0f);	
+	glVertex3f(-1.0f, 1.0f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);	
+	glVertex3f(-1.0f, 1.0f, -1.0f);
+
+	// nova face
+	glTexCoord2f(0.0f, 0.0f);	
+	glVertex3f(-1.0f, 1.0f, -1.0f);
+
+	glTexCoord2f(1.0f, 0.0f);	
+	glVertex3f(1.0f, 1.0f, -1.0f);
+
+	glTexCoord2f(1.0f, 1.0f);	
+	glVertex3f(1.0f, 1.0f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);	
+	glVertex3f(-1.0f, 1.0f, 1.0f);
+
+	// nova face
+	glTexCoord2f(0.0f, 0.0f);	
+	glVertex3f(-1.0f, -1.0f, -1.0f);
+
+	glTexCoord2f(1.0f, 0.0f);	
+	glVertex3f(1.0f, -1.0f, -1.0f);
+
+	glTexCoord2f(1.0f, 1.0f);	
+	glVertex3f(1.0f, -1.0f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);	
+	glVertex3f(-1.0f, -1.0f, 1.0f);
+
 
 	glEnd();
 }
