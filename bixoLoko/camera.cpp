@@ -6,9 +6,14 @@ See LICENSE.TXT*/
 
 #ifdef _WIN32
 #include <Windows.h>
-#endif
 #include <gl\GL.h>
 #include <gl\GLU.h>
+
+#else
+#include <GL/gl.h>
+#include <GL/glu.h>
+#endif
+
 #include <cmath>
 #include "camera.h"
 

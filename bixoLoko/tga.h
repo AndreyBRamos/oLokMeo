@@ -10,9 +10,10 @@ See LICENSE.TXT*/
 #ifdef _WIN32
 #include <Windows.h>
 #include <gl\GL.h>
-#endif
-#include <GL/gl.h>
 
+#else
+#include <GL/gl.h>
+#endif
 
 // This is a class that loads TGA files into opengl textures
 class TGA
