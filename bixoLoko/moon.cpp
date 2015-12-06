@@ -42,7 +42,8 @@ void Moon::calculatePosition(float time)
 	position[2] = 0;
 
 	// find the rotation of the moon around its axis
-	rotation = time * 360 / rotationTime;
+	//rotation = time * 360 / rotationTime;
+    rotation = 0.0;
 }
 
 // Render it to the screen

@@ -129,17 +129,17 @@ void init(void)
 
 	// Add all the planets with accurate data. Distance measured in km, time measured in terra days.
 	sistemaSolar.addPlanet(0, 1, 500, 695500, sol->getTextureHandle()); // sol
-	sistemaSolar.addPlanet(57910000, 88, 58.6, 2440, mercurio->getTextureHandle()); // mercurio
-	sistemaSolar.addPlanet(108200000, 224.65, 243, 6052, venus->getTextureHandle()); // venus
-	sistemaSolar.addPlanet(149600000, 365, 1, 12371, terra->getTextureHandle()); // terra 6371
-	sistemaSolar.addPlanet(227939100, 686, 1.03f, 3389, marte->getTextureHandle()); // marte
+	sistemaSolar.addPlanet(57910000, 88, 58.6, 6440, mercurio->getTextureHandle()); // mercurio
+	sistemaSolar.addPlanet(108200000, 224.65, 243, 12052, venus->getTextureHandle()); // venus
+	sistemaSolar.addPlanet(149600000, 365, 1, 18371, terra->getTextureHandle()); // terra 6371
+	sistemaSolar.addPlanet(227939100, 686, 1.03f, 9389, marte->getTextureHandle()); // marte
 	/*sistemaSolar.addPlanet(778500000, 4332, 0.4139, 69911, jupiter->getTextureHandle()); // jupiter
 	sistemaSolar.addPlanet(1433000000, 10759, 0.44375, 58232, saturno->getTextureHandle()); // saturno
 	sistemaSolar.addPlanet(2877000000, 30685, 0.718056, 25362, urano->getTextureHandle()); // urano
 	sistemaSolar.addPlanet(4503000000, 60188, 0.6713, 24622, netuno->getTextureHandle()); // netuno
 	sistemaSolar.addPlanet(5906380000, 90616, 6.39, 1137, plutao->getTextureHandle()); // plutao*/
 
-	sistemaSolar.addMoon(3, 7000000, 27.3, 27.3, 1738, moon->getTextureHandle()); // test moon for the terra
+	sistemaSolar.addMoon(3, 13000000, 27.3, 27.3, 3538, moon->getTextureHandle()); // test moon for the terra
 
 	// set up time
 	time = 2.552f;
@@ -253,7 +253,7 @@ void keyDown(unsigned char key, int x, int y)
 		planetSelected = key - '0';
 	}
     if (key == '9'){
-        // Eleva a camera e aponta para o centro do sistema solar 
+        // Eleva a camera e aponta para o centro do sistema solar
 		float vec[3];
         vec[0] = 0.1;
         vec[1] = 0.1;
