@@ -39,10 +39,10 @@ public:
 	void pointAt(float* targetVec);
 
     // point the camera to the given a god view
-    void godView(void);
+    void visaoDeus(void);
 
     // point the camera back to the normal view
-    void normalView(void);
+    void visaoNormal(void);
 
 	// speed up the camera speed
 	void speedUp(void);

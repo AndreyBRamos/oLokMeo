@@ -167,11 +167,11 @@ void Camera::pointAt(float* targetVec)
 }
 
 // Olhar de DEUS (Top-down)
-void Camera::godView(void){
+void Camera::visaoDeus(void){
     vectorSet(position, 0.0f, 0.0f, 2.5f);
 }
 // Olhar normal
-void Camera::normalView(void){
+void Camera::visaoNormal(void){
 	vectorSet(position, 0.764331460f, -1.66760659f, 0.642456770);    
 }
 
