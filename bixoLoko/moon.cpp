@@ -62,7 +62,7 @@ void Moon::render(void)
 	gluQuadricTexture(quadric, true);
 	gluQuadricNormals(quadric, GLU_SMOOTH);
 
-	gluSphere(quadric, radius * planetSizeScale, 30, 30);
+	gluSphere(quadric, radius * escalaTamanhoPlaneta, 30, 30);
 
 	glPopMatrix();
 }
