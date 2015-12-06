@@ -143,7 +143,7 @@ void init(void)
 
 	// set up time
 	time = 2.552f;
-	velocidadeTempo = 5.0f;
+	velocidadeTempo = 1.0f;
 
 	// reset controls
 	controls.forward = false;
@@ -240,8 +240,10 @@ void display(void)
 void keyDown(unsigned char key, int x, int y)
 {
 	// check for numerical keys
-	if (key > '0' && key <= '9')
-	{
+	if (key > '0' && key <= '8'){
+        // back to the normal view
+        camera.normalView();
+            
 		// point at the specified planet
 		float vec[3];
 		sistemaSolar.getPlanetPosition(key - '0', vec);
@@ -250,6 +252,14 @@ void keyDown(unsigned char key, int x, int y)
 		// select that planet
 		planetSelected = key - '0';
 	}
+    if (key == '9'){ 
+		float vec[3];
+        vec[0] = 0.1;
+        vec[1] = 0.1;
+        vec[2] = 0.1;
+        camera.godView();	    	
+        camera.pointAt(vec);
+    }
 	switch (key)
 	{
 	case '-':
@@ -262,10 +272,10 @@ void keyDown(unsigned char key, int x, int y)
 		helpDialogue = !helpDialogue; // toggle the dialogue
 		break;*/
 	case '[':
-		escalaTamanhoPlaneta /= 1.2; // make planet scale smaller
+		//escalaTamanhoPlaneta /= 1.2; // make planet scale smaller
 		break;
 	case ']':
-		escalaTamanhoPlaneta *= 1.2; // make planet scale bigger
+		//escalaTamanhoPlaneta *= 1.2; // make planet scale bigger
 		break;
 	/*case 'o':
 		showOrbits = !showOrbits; // toggle show orbits
@@ -274,7 +284,7 @@ void keyDown(unsigned char key, int x, int y)
 		addMoon(); // add a moon to the selected planet
 		break;
 	case 'r':
-		escalaTamanhoPlaneta = distanceScale;
+		//escalaTamanhoPlaneta = distanceScale;
 		break;
 	case ',':
 		camera.slowDown(); // slow down camera

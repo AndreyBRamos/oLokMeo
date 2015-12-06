@@ -38,6 +38,12 @@ public:
 	// points the camera at the given point in 3d space
 	void pointAt(float* targetVec);
 
+    // point the camera to the given a god view
+    void godView(void);
+
+    // point the camera back to the normal view
+    void normalView(void);
+
 	// speed up the camera speed
 	void speedUp(void);
 
