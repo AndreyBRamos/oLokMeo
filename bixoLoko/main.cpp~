@@ -131,7 +131,7 @@ void init(void)
 	sistemaSolar.addPlanet(0, 1, 500, 695500, sol->getTextureHandle()); // sol
 	sistemaSolar.addPlanet(57910000, 88, 58.6, 2440, mercurio->getTextureHandle()); // mercurio
 	sistemaSolar.addPlanet(108200000, 224.65, 243, 6052, venus->getTextureHandle()); // venus
-	sistemaSolar.addPlanet(149600000, 365, 1, 6371, terra->getTextureHandle()); // terra
+	sistemaSolar.addPlanet(149600000, 365, 1, 12371, terra->getTextureHandle()); // terra 6371
 	sistemaSolar.addPlanet(227939100, 686, 1.03f, 3389, marte->getTextureHandle()); // marte
 	/*sistemaSolar.addPlanet(778500000, 4332, 0.4139, 69911, jupiter->getTextureHandle()); // jupiter
 	sistemaSolar.addPlanet(1433000000, 10759, 0.44375, 58232, saturno->getTextureHandle()); // saturno
@@ -143,7 +143,7 @@ void init(void)
 
 	// set up time
 	time = 2.552f;
-	velocidadeTempo = 5.0f;
+	velocidadeTempo = 1.0f;
 
 	// reset controls
 	controls.forward = false;
@@ -240,8 +240,10 @@ void display(void)
 void keyDown(unsigned char key, int x, int y)
 {
 	// check for numerical keys
-	if (key > '0' && key <= '9')
-	{
+	if (key > '0' && key <= '8'){
+        // back to the normal view
+        camera.normalView();
+            
 		// point at the specified planet
 		float vec[3];
 		sistemaSolar.getPlanetPosition(key - '0', vec);
@@ -250,6 +252,14 @@ void keyDown(unsigned char key, int x, int y)
 		// select that planet
 		planetSelected = key - '0';
 	}
+    if (key == '9'){ 
+		float vec[3];
+        vec[0] = 0.1;
+        vec[1] = 0.1;
+        vec[2] = 0.1;
+        camera.godView();	    	
+        camera.pointAt(vec);
+    }
 	switch (key)
 	{
 	case '-':
@@ -262,10 +272,10 @@ void keyDown(unsigned char key, int x, int y)
 		helpDialogue = !helpDialogue; // toggle the dialogue
 		break;*/
 	case '[':
-		escalaTamanhoPlaneta /= 1.2; // make planet scale smaller
+		//escalaTamanhoPlaneta /= 1.2; // make planet scale smaller
 		break;
 	case ']':
-		escalaTamanhoPlaneta *= 1.2; // make planet scale bigger
+		//escalaTamanhoPlaneta *= 1.2; // make planet scale bigger
 		break;
 	/*case 'o':
 		showOrbits = !showOrbits; // toggle show orbits
@@ -274,7 +284,7 @@ void keyDown(unsigned char key, int x, int y)
 		addMoon(); // add a moon to the selected planet
 		break;
 	case 'r':
-		escalaTamanhoPlaneta = distanceScale;
+		//escalaTamanhoPlaneta = distanceScale;
 		break;
 	case ',':
 		camera.slowDown(); // slow down camera

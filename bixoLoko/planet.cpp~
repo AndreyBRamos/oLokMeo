@@ -21,7 +21,7 @@ See LICENSE.TXT*/
 
 #include "globals.h"
 
-float escalaTamanhoPlaneta = 0.000005f; // planetSizeScale
+float planetSizeScale = 0.000005f;
 
 Planet::Planet(float distanceFromSun, float orbitTime, float rotationTime, float radius, GLuint textureHandle)
 {
@@ -80,7 +80,7 @@ void Planet::render(void)
 
 	if (distanceFromSun < 0.001f) // if this is the sun, dont render it too big, and disable lighting
 	{
-		float radiusScaled = radius * escalaTamanhoPlaneta;
+		float radiusScaled = radius * planetSizeScale;
 		if (radiusScaled > 0.5f) radiusScaled = 0.5f;
 
 		glDisable(GL_LIGHTING);
@@ -89,7 +89,7 @@ void Planet::render(void)
 	}
 	else
 	{
-		gluSphere(quadric, radius * escalaTamanhoPlaneta, 30, 30);
+		gluSphere(quadric, radius * planetSizeScale, 30, 30);
 	}
 
 

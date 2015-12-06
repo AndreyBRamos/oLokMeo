@@ -131,7 +131,7 @@ void init(void)
 	sistemaSolar.addPlanet(0, 1, 500, 695500, sol->getTextureHandle()); // sol
 	sistemaSolar.addPlanet(57910000, 88, 58.6, 2440, mercurio->getTextureHandle()); // mercurio
 	sistemaSolar.addPlanet(108200000, 224.65, 243, 6052, venus->getTextureHandle()); // venus
-	sistemaSolar.addPlanet(149600000, 365, 1, 6371, terra->getTextureHandle()); // terra
+	sistemaSolar.addPlanet(149600000, 365, 1, 12371, terra->getTextureHandle()); // terra 6371
 	sistemaSolar.addPlanet(227939100, 686, 1.03f, 3389, marte->getTextureHandle()); // marte
 	/*sistemaSolar.addPlanet(778500000, 4332, 0.4139, 69911, jupiter->getTextureHandle()); // jupiter
 	sistemaSolar.addPlanet(1433000000, 10759, 0.44375, 58232, saturno->getTextureHandle()); // saturno
@@ -241,8 +241,8 @@ void keyDown(unsigned char key, int x, int y)
 {
 	// check for numerical keys
 	if (key > '0' && key <= '8'){
-        // back to the normal view
-        camera.normalView();
+        // Volta à posição normal (inicial)    
+        camera.visaoNormal();
             
 		// point at the specified planet
 		float vec[3];
@@ -252,12 +252,13 @@ void keyDown(unsigned char key, int x, int y)
 		// select that planet
 		planetSelected = key - '0';
 	}
-    if (key == '9'){ 
+    if (key == '9'){
+        // Eleva a camera e aponta para o centro do sistema solar 
 		float vec[3];
         vec[0] = 0.1;
         vec[1] = 0.1;
         vec[2] = 0.1;
-        camera.godView();	    	
+        camera.visaoDeus();	    	
         camera.pointAt(vec);
     }
 	switch (key)
