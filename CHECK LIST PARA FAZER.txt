@@ -1,18 +1,18 @@
-OK - Remover o Help
+OK - Remover o Help     
 
- - Remover as funÁıes do teclado desnecess·rias
-//Em partes to tirando, quando terminar todas desnecess·rias coloco o OK :)
+ - Remover as fun—É—àes do teclado desnecess—Ärias
+//Em partes to tirando, quando terminar todas desnecess—Ärias coloco o OK :)
 
 OK - Remover a linha das orbitas dos planetas
 
 OK - Aumentar a velocidade do planeta andar pela orbita
 
 OK - Remover todos os planetas, deixar o Sol, a Terra, a Lua e mais 2 planetas(um antes e um depois da terra!)
-//deixei na sequencia, Sol, Mercurio, Venus, Terra(lua) e Marte, sÛ comentei, depois vemos  certo qual deixar o resto remover o codigo
+//deixei na sequencia, Sol, Mercurio, Venus, Terra(lua) e Marte, s–∑ comentei, depois vemos  certo qual deixar o resto remover o codigo
 
- - Aumentar os planetas em comparaÁ„o ao Sol (ja que o tamanho deles n„o importa muito)
+ - Aumentar os planetas em compara—É—Åo ao Sol (ja que o tamanho deles n—Åo importa muito)
 
- - Fazer a camera ir para tr·s atraves de alguma tecla do teclado e posicionar a c‚mera na vis„o de "deus", deve ser alguma rotaÁ„o do ponto de vista da    c‚mera, a gente ja faz essa rotaÁ„o com alguma tecla quando anda com a nave, È sÛ fixar a camera la em cima
+ - Fazer a camera ir para tr—Äs atraves de alguma tecla do teclado e posicionar a c–†mera na vis—Åo de "deus", deve ser alguma rota—É—Åo do ponto de vista da    c–†mera, a gente ja faz essa rota—É—Åo com alguma tecla quando anda com a nave, –∂ s–∑ fixar a camera la em cima
 
  - Procurar outro arquivo para fazer a textura dos planetas e do fundo, pra originalizar
 
