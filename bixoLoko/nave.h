@@ -53,25 +53,9 @@ private:
 public:
 	Nave(float distanceFromSun, float orbitTime, float rotationTime, float radius, GLuint textureHandle); //;
 
-    //seta posicao
-    //void setaPosicao();
-
     //renderiza
     void render(float* vec);
 
-    void transformacaoTranslation(void);
-    
-    // move the camera forward
-	void forward(void);
-
-	// strafe left
-	void left(void);
-
-	// strafe right
-	void right(void);
-
-	// move the camera backward
-	void backward(void);
 };
 
 #endif

@@ -221,7 +221,12 @@ void display(void)
 	glEnable(GL_LIGHTING);
 
 	sistemaSolar.render();
-    if(vecCamera[0] != 0.0 && vecCamera[1] != 0.0 && vecCamera[2] != 2.5){ 
+    if(vecCamera[0] == 0.0 && vecCamera[1] == 0.0 && vecCamera[2] == 2.5){ 
+        vecCamera[0] = 0.764331460f;
+        vecCamera[1] = -1.66760659f;
+        vecCamera[2] = 0.642456770;    
+        sistemaSolar.renderNave(vecCamera);
+    }else{
         sistemaSolar.renderNave(vecCamera);
     }   
 	glDisable(GL_LIGHTING);

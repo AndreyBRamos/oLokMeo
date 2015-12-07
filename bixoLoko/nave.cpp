@@ -61,16 +61,6 @@ Nave::Nave(float distanceFromSun, float orbitTime, float rotationTime, float rad
     naveTurnSpeed = 0.01f;
 }
 
-// Calculate its position in 3d spacein the orbit using the given time value
-/*void Nave::setaPosicao(float time){
-    	vectorSet(position, 0.764331460f, -1.66760659f, 0.642456770);
-        vectorSet(frenteVec,-0.398769796f, 0.763009906f, -0.508720219f);
-    	vectorSet(direitaVec, 0.886262059f, 0.463184059f, 0.000000000f);  
-	    vectorSet(cimaVec, -0.235630989f, 0.450859368f, 0.860931039f);
-        naveSpeed = 0.005f;
-	    naveTurnSpeed = 0.01f;
-}
-*/
 // Render it to the screen
 void Nave::render(float* vec)
 {
@@ -95,57 +85,4 @@ void Nave::render(float* vec)
     gluSphere(quadric, radius * escalaTamanhoPlaneta, 30, 30);
 
 	glPopMatrix();
-}
-
-void Nave::transformacaoTranslation(){
-	// translate to emulate camera position
-	glTranslatef(-posicao[0], -posicao[1], -posicao[2]);
-}
-
-// move the camera forward
-void Nave::forward(void)
-{
-	// make a movement vector the right speed facing the forward direction
-	float vec[3];
-	vectorCopia(vec, frenteVec);
-	vectorMult(vec, naveSpeed);
-
-	// add the movement vec to the position vec
-	vectorAdiciona(posicao, vec);
-}
-
-// move the camera backward
-void Nave::backward(void)
-{
-	// make a movement vector the right speed facing the backward direction
-	float vec[3];
-	vectorCopia(vec, frenteVec);
-	vectorMult(vec, -naveSpeed); // -cameraSpeed for backwards
-
-	// add the movement vec to the position vec
-	vectorAdiciona(posicao, vec);
-}
-
-// strafe left
-void Nave::left(void)
-{
-	// make a movement vector the right speed facing the left direction
-	float vec[3];
-	vectorCopia(vec, direitaVec);
-	vectorMult(vec, -naveSpeed); // -cameraSpeed for left
-
-	// add the movement vec to the position vec
-	vectorAdiciona(posicao, vec);
-}
-
-// strafe right
-void Nave::right(void)
-{
-	// make a movement vector the right speed facing the right direction
-	float vec[3];
-	vectorCopia(vec, direitaVec);
-	vectorMult(vec, naveSpeed);
-
-	// add the movement vec to the position vec
-	vectorAdiciona(posicao, vec);
 }
