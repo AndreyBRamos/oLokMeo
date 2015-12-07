@@ -19,6 +19,10 @@ void SolarSystem::calculatePositions(float time)
 		planets[i].calculatePosition(time);
 	}
 }
+// add nave
+void SolarSystem::addNave(float distanceFromSun, float orbitTime, float rotationTime, float radius, GLuint textureHandle){ 
+    naves.push_back(Nave(distanceFromSun, orbitTime, rotationTime, radius, textureHandle));
+}
 
 // Add a planet with the given data
 void SolarSystem::addPlanet(float distanceFromSun, float orbitTime, float rotationTime, float radius, GLuint textureHandle)
@@ -39,6 +43,12 @@ void SolarSystem::render()
 	{
 		planets[i].render();
 	}
+}
+
+void SolarSystem::renderNave(float * vec){
+    for (int i = 0; i < naves.size(); i++){ 
+        naves[i].render(vec);
+    }
 }
 
 

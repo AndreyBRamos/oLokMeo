@@ -8,6 +8,7 @@ See LICENSE.TXT*/
 // Compilação windows 
 #include <cmath>
 #include <cstdlib>
+#include <stdio.h>
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -23,7 +24,9 @@ See LICENSE.TXT*/
 #include "tga.h"
 #include "solarsystem.h"
 #include "camera.h"
+#include "nave.h"
 #include "globals.h"
+#include <vector>
 
 
 // the screen size
@@ -43,6 +46,9 @@ SolarSystem sistemaSolar;
 
 // The instance of the camera
 Camera camera;
+
+//Instancia nave
+//Nave nave;
 
 // These control the simulation of time
 double time;
@@ -126,11 +132,12 @@ void init(void)
 	TGA* urano = new TGA("images/uranus.tga");
 	TGA* netuno = new TGA("images/neptune.tga");
 	TGA* plutao = new TGA("images/pluto.tga");
+    TGA* nave = new TGA("images/nave.tga");
 
 	// Add all the planets with accurate data. Distance measured in km, time measured in terra days.
 	sistemaSolar.addPlanet(0, 1, 500, 695500, sol->getTextureHandle()); // sol
 	sistemaSolar.addPlanet(57910000, 88, 58.6, 6440, mercurio->getTextureHandle()); // mercurio
-	sistemaSolar.addPlanet(108200000, 224.65, 243, 12052, venus->getTextureHandle()); // venus
+    sistemaSolar.addPlanet(108200000, 224.65, 243, 12052, venus->getTextureHandle()); // venus
 	sistemaSolar.addPlanet(149600000, 365, 1, 18371, terra->getTextureHandle()); // terra 6371
 	sistemaSolar.addPlanet(227939100, 686, 1.03f, 9389, marte->getTextureHandle()); // marte
 	/*sistemaSolar.addPlanet(778500000, 4332, 0.4139, 69911, jupiter->getTextureHandle()); // jupiter
@@ -140,6 +147,8 @@ void init(void)
 	sistemaSolar.addPlanet(5906380000, 90616, 6.39, 1137, plutao->getTextureHandle()); // plutao*/
 
 	sistemaSolar.addMoon(3, 13000000, 27.3, 27.3, 3538, moon->getTextureHandle()); // test moon for the terra
+
+    sistemaSolar.addNave(778500000, 4332, 0.4139, 3911, nave->getTextureHandle());
 
 	// set up time
 	time = 2.552f;
@@ -164,6 +173,7 @@ void drawCube(void);
 
 void display(void)
 {
+    float vecCamera[3];
 	// update the logic and simulation
 	time += velocidadeTempo;
 	sistemaSolar.calculatePositions(time);
@@ -173,6 +183,8 @@ void display(void)
 	if (controls.yawLeft) camera.yawLeft();		if (controls.yawRight) camera.yawRight();
 	if (controls.rollLeft) camera.rollLeft();	if (controls.rollRight) camera.rollRight();
 	if (controls.pitchUp) camera.pitchUp();		if (controls.pitchDown) camera.pitchDown();
+
+    
 
 	// clear the buffers
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -189,6 +201,7 @@ void display(void)
 
 	// perform the camera orientation transform
 	camera.transformOrientation();
+    
 
 	// draw the skybox
 	glBindTexture(GL_TEXTURE_2D, stars->getTextureHandle());
@@ -196,9 +209,10 @@ void display(void)
 
 	// perform the camera translation transform
 	camera.transformTranslation();
-
-	
-	
+    
+    camera.getPosicao(vecCamera);
+    
+          
 	GLfloat lightPosition[] = { 0.0, 0.0, 0.0, 1.0 };
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
 	
@@ -207,6 +221,9 @@ void display(void)
 	glEnable(GL_LIGHTING);
 
 	sistemaSolar.render();
+    if(vecCamera[0] != 0.0 && vecCamera[1] != 0.0 && vecCamera[2] != 2.5){ 
+        sistemaSolar.renderNave(vecCamera);
+    }   
 	glDisable(GL_LIGHTING);
 
 	// possibly render orbits

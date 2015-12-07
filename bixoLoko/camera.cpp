@@ -308,3 +308,8 @@ void Camera::yawRight(void)
 	rotateAroundVec(rightVec, upVec, -cameraTurnSpeed, tempVec);
 	vectorCopy(rightVec, tempVec);
 }
+void Camera::getPosicao(float* vec){
+    vec[0] = position[0];
+    vec[1] = position[1];
+    vec[2] = position[2];
+}

@@ -16,11 +16,13 @@ See LICENSE.TXT*/
 #include <vector>
 
 #include "planet.h"
+#include "nave.h"
 
 class SolarSystem
 {
 private:
 	std::vector<Planet> planets;
+    std::vector<Nave> naves;
 
 public:
 	SolarSystem();
@@ -31,11 +33,16 @@ public:
 	// Add a planet with the given data
 	void addPlanet(float distanceFromSun, float orbitTime, float rotationTime, float radius, GLuint textureHandle);
 
-	// Add a moon to the specified planet
+    //adiciona a vane
+    void addNave(float distanceFromSun, float orbitTime, float rotationTime, float radius, GLuint textureHandle);
+	
+    // Add a moon to the specified planet
 	void addMoon(int planetIndex, float distanceFromPlanet, float orbitTime, float rotationTime, float radius, GLuint textureHandle);
 
 	// render the planets with opengl
 	void render();
+    
+    void renderNave(float* vec);
 
 	// render the drawing of the orbits
 	void renderOrbits();
