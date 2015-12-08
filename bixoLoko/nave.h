@@ -8,36 +8,36 @@
 class Nave
 {
 private:
-  	// distance from the sun
+  	// distancia do sol
 	float distanceFromSun;
 
-	// time it takes to complete 1 orbit
+	// tempo de orbita
 	float orbitTime;
 
-	// time it takes to spin 360 degrees
+	// rotacao
 	float rotationTime;
 
-	// radius of the planet itself
+	// raio da nave
 	float radius;
 
-	// a vector pointing in the directio nyoure facing
+	// vetor para movimentacao (frente)
 	float frenteVec[3];
 
-	// a vector pointing to the right of where your facing (to describe orientation
+	// vetor para movimentacao (direita)
 	float direitaVec[3];
 
-	// a vector pointing upwards from where youre facing
+	// vetor para movimentacao (cima)
 	float cimaVec[3];
 
-	// a vector describing the position of the camera
+	// declaracao dos vetores de posicao
 	float posicao[3];
-    float vec[3];
+    	float vec[3];
 
-	// the camera speed
+	// velocidade 
 	float naveSpeed;
 	float naveTurnSpeed;
 
-    // the texture used for rendering
+    // variavel especial do opengl para textura
 	GLuint textureHandle;
 
 
