@@ -17,7 +17,6 @@
 #include "tga.h"
 #include "solarsystem.h"
 #include "camera.h"
-#include "nave.h"
 #include "globals.h"
 #include <vector>
 

@@ -1,8 +1,3 @@
-/*Published under The MIT License (MIT)
-
-See LICENSE.TXT*/
-
-// Ryan Pridgeon COM2032 rp00091
 
 #include "planet.h"
 #include <cmath>

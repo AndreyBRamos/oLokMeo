@@ -1,12 +1,3 @@
-/*Published under The MIT License (MIT)
-
-See LICENSE.TXT*/
-
-// Ryan Pridgeon COM2032 rp00091
-
-#ifndef RYAN_NAVE_H
-#define RYAN_NAVE_H
-
 #ifdef _WIN32
 #include <Windows.h>
 #include <gl\GL.h>
@@ -58,4 +49,3 @@ public:
 
 };
 
-#endif

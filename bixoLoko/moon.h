@@ -1,12 +1,3 @@
-/*Published under The MIT License (MIT)
-
-See LICENSE.TXT*/
-
-// Ryan Pridgeon COM2032 rp00091
-
-#ifndef RYAN_MOON_H
-#define RYAN_MOON_H
-
 #ifdef _WIN32
 #include <Windows.h>
 #include <gl\GL.h>
@@ -52,5 +43,3 @@ public:
 	// renderiza a orbita
 	void renderOrbit(void);
 };
-
-#endif

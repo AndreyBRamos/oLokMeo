@@ -1,11 +1,3 @@
-/*Published under The MIT License (MIT)
-
-See LICENSE.TXT*/
-
-// Ryan Pridgeon COM2032 rp00091
-
-#ifndef RYAN_SOLARSYSTEM_H
-#define RYAN_SOLARSYSTEM_H
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -54,4 +46,3 @@ public:
 	float getRadiusOfPlanet(int index);
 };
 
-#endif
