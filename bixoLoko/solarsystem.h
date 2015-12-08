@@ -19,30 +19,30 @@ private:
 public:
 	SolarSystem();
 
-	// calculate the positions and logic of all planets
+	// calcula a posição dos planetas
 	void calculatePositions(float time);
 	
-	// Add a planet with the given data
+	// adiciona um planeta
 	void addPlanet(float distanceFromSun, float orbitTime, float rotationTime, float radius, GLuint textureHandle);
 
-    //adiciona a vane
+    //adiciona a nave
     void addNave(float distanceFromSun, float orbitTime, float rotationTime, float radius, GLuint textureHandle);
 	
-    // Add a moon to the specified planet
+    // adiciona uma lua
 	void addMoon(int planetIndex, float distanceFromPlanet, float orbitTime, float rotationTime, float radius, GLuint textureHandle);
 
-	// render the planets with opengl
+	// renderiza o planeta
 	void render();
     
     void renderNave(float* vec);
 
-	// render the drawing of the orbits
+	// renderiza as orbitas
 	void renderOrbits();
 
-	// get the position in 3d space units of the given planet (specified by its index in the list) and put it into the 3d vector vec
+	// recebe a posição do planeta
 	void getPlanetPosition(int index, float* vec);
 
-	// get the radius of the planet at the given index in the planets list
+	// recebe o raio do planeta
 	float getRadiusOfPlanet(int index);
 };
 
