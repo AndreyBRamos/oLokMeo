@@ -1,3 +1,9 @@
+/*
+Desenvolvedores:
+Andrey B. Ramos
+Raffael C. Rossi
+Thiago Mendes
+*/
 
 #ifdef _WIN32
 #include <Windows.h>

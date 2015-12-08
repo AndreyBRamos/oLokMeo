@@ -1,4 +1,9 @@
-
+/*
+Desenvolvedores:
+Andrey B. Ramos
+Raffael C. Rossi
+Thiago Mendes
+*/
 
 #include "solarsystem.h"
 

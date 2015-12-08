@@ -1,3 +1,10 @@
+/*
+Desenvolvedores:
+Andrey B. Ramos
+Raffael C. Rossi
+Thiago Mendes
+*/
+
 // Compilação windows 
 #include <cmath>
 #include <cstdlib>

@@ -1,3 +1,9 @@
+/*
+Desenvolvedores:
+Andrey B. Ramos
+Raffael C. Rossi
+Thiago Mendes
+*/
 
 #include "planet.h"
 #include <cmath>

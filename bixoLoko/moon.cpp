@@ -1,3 +1,10 @@
+/*
+Desenvolvedores:
+Andrey B. Ramos
+Raffael C. Rossi
+Thiago Mendes
+*/
+
 #include "moon.h"
 #include <cmath>
 
