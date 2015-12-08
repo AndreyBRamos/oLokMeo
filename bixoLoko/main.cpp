@@ -1,10 +1,3 @@
-/*Published under The MIT License (MIT)
-
-See LICENSE.TXT*/
-
-// Ryan Pridgeon COM2032 rp00091
-
-
 // Compilação windows 
 #include <cmath>
 #include <cstdlib>
@@ -29,56 +22,51 @@ See LICENSE.TXT*/
 #include <vector>
 
 
-// the screen size
+bool camDeus = false;
+
+//Tamanho da tela
 int telaLargura, telaAltura;
 
-// The TGA texture containing the help dialogue and starfield and moon texture
-TGA* help, *stars, * moon;
-// toggles if the help dialogue is enabled
-bool helpDialogue = true;
-// toggles if orbits are drawn
-//bool showOrbits = true;
-// holds the index of the last planet that was selected with the 1 to 9 number keys
+// Variáveis das texturas
+TGA* test, *stars, * moon;
+
+// Identifica qual planeta foi o ultimo selecionado para ver
 int planetSelected = 1;
 
-// The main instance of the solar system
+// Variável do sistema solar
 SolarSystem sistemaSolar;
 
-// The instance of the camera
+// Variávei da câmera
 Camera camera;
 
-//Instancia nave
-//Nave nave;
 
-// These control the simulation of time
+// Variáveis para controlar a variação do tempo
 double time;
 double velocidadeTempo;
 
-// holds the state of the controls for the camera - when true, the key for that control is being pressed
+//Configurado para guardar o estado dos controles
 struct ControlStates
 {
 	bool forward, backward, left, right, yawLeft, yawRight, pitchUp,
 		pitchDown, rollLeft, rollRight;
 } controls;
 
-
-// timer function called every 10ms or more
+//Função do times do display
 void timer(int)
 {
-	glutPostRedisplay(); // post for display func
-	glutTimerFunc(10, timer, 0); // limit frame drawing to 100fps
+	glutPostRedisplay(); 
+	glutTimerFunc(10, timer, 0); 
 }
 
-// creates a random number up to the max specified
+//Cria um numero randômico
 float random(float max)
 {
 	return (float)(std::rand() % 1000) * max * 0.001;
 }
 
-// adds a moon to the selected planet
+//Adiciona uma lua
 void addMoon()
 {
-	// make a moon using random values
 	sistemaSolar.addMoon(planetSelected, 
 		(500 + random(1500)) * sistemaSolar.getRadiusOfPlanet(planetSelected),
 		10 + random(100), 0.5 + random(20),
@@ -91,7 +79,7 @@ void init(void)
 	glShadeModel(GL_SMOOTH);
 	glEnable(GL_TEXTURE_2D);
 	
-	// set up lighting
+	//Configura a iluminação
 	glEnable(GL_LIGHTING);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -117,8 +105,7 @@ void init(void)
 	glEnable(GL_LIGHT0);
 	glDisable(GL_LIGHTING);
 
-	// Load all image data
-	//help = new TGA("images/help.tga");
+	// Carrega as texturas
 	stars = new TGA("images/stars.tga");
 	moon = new TGA("images/moon.tga");
 
@@ -134,27 +121,27 @@ void init(void)
 	TGA* plutao = new TGA("images/pluto.tga");
     TGA* nave = new TGA("images/nave.tga");
 
-	// Add all the planets with accurate data. Distance measured in km, time measured in terra days.
-	sistemaSolar.addPlanet(0, 1, 500, 695500, sol->getTextureHandle()); // sol
-	sistemaSolar.addPlanet(57910000, 88, 58.6, 6440, mercurio->getTextureHandle()); // mercurio
-    sistemaSolar.addPlanet(108200000, 224.65, 243, 12052, venus->getTextureHandle()); // venus
-	sistemaSolar.addPlanet(149600000, 365, 1, 18371, terra->getTextureHandle()); // terra 6371
-	sistemaSolar.addPlanet(227939100, 686, 1.03f, 9389, marte->getTextureHandle()); // marte
-	/*sistemaSolar.addPlanet(778500000, 4332, 0.4139, 69911, jupiter->getTextureHandle()); // jupiter
-	sistemaSolar.addPlanet(1433000000, 10759, 0.44375, 58232, saturno->getTextureHandle()); // saturno
-	sistemaSolar.addPlanet(2877000000, 30685, 0.718056, 25362, urano->getTextureHandle()); // urano
-	sistemaSolar.addPlanet(4503000000, 60188, 0.6713, 24622, netuno->getTextureHandle()); // netuno
-	sistemaSolar.addPlanet(5906380000, 90616, 6.39, 1137, plutao->getTextureHandle()); // plutao*/
+	//Adiciona os planetas no sistema, a distância está em KM e o tempo em dias da terra.
+	sistemaSolar.addPlanet(0, 1, 500, 695500, sol->getTextureHandle()); 
+	sistemaSolar.addPlanet(57910000, 88, 58.6, 6440, mercurio->getTextureHandle()); 
+    sistemaSolar.addPlanet(108200000, 224.65, 243, 12052, venus->getTextureHandle()); 
+	sistemaSolar.addPlanet(149600000, 365, 1, 18371, terra->getTextureHandle()); 
+	sistemaSolar.addPlanet(227939100, 686, 1.03f, 9389, marte->getTextureHandle());
+	sistemaSolar.addPlanet(778500000, 4332, 0.4139, 69911, jupiter->getTextureHandle()); 
+	sistemaSolar.addPlanet(1433000000, 10759, 0.44375, 58232, saturno->getTextureHandle()); 
+	sistemaSolar.addPlanet(2877000000, 30685, 0.718056, 25362, urano->getTextureHandle());
+	sistemaSolar.addPlanet(4503000000, 60188, 0.6713, 24622, netuno->getTextureHandle()); 
+	sistemaSolar.addPlanet(5906380000, 90616, 6.39, 1137, plutao->getTextureHandle());
 
-	sistemaSolar.addMoon(3, 13000000, 27.3, 27.3, 3538, moon->getTextureHandle()); // test moon for the terra
+	sistemaSolar.addMoon(3, 13000000, 27.3, 27.3, 3538, moon->getTextureHandle());//Adiciona a lua na terra
 
-    sistemaSolar.addNave(778500000, 4332, 0.4139, 3911, nave->getTextureHandle());
+    sistemaSolar.addNave(778500000, 4332, 0.4139, 3911, nave->getTextureHandle());//Adiciona a nave no sistema
 
-	// set up time
+	//Seta o tempo
 	time = 2.552f;
 	velocidadeTempo = 1.0f;
 
-	// reset controls
+	//Inicia os controles
 	controls.forward = false;
 	controls.backward = false;
 	controls.left = false;
@@ -174,7 +161,7 @@ void drawCube(void);
 void display(void)
 {
     float vecCamera[3];
-	// update the logic and simulation
+	// Atualiza a simulação
 	time += velocidadeTempo;
 	sistemaSolar.calculatePositions(time);
 
@@ -186,12 +173,11 @@ void display(void)
 
     
 
-	// clear the buffers
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glColor3f(1.0, 1.0, 1.0);
 
 	
-	// set up the perspective matrix for rendering the 3d world
+	//Seta a matriz em perspectiva
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(70.0f, (float)telaLargura / (float)telaAltura, 0.001f, 500.0f);
@@ -199,15 +185,15 @@ void display(void)
 	glLoadIdentity();
 	
 
-	// perform the camera orientation transform
+	// Efetua a transformação da orientação da câmera
 	camera.transformOrientation();
     
 
-	// draw the skybox
+	// Desenha o ceu
 	glBindTexture(GL_TEXTURE_2D, stars->getTextureHandle());
 	drawCube();
 
-	// perform the camera translation transform
+	// Efetua a translação da câmera
 	camera.transformTranslation();
     
     camera.getPosicao(vecCamera);
@@ -216,7 +202,7 @@ void display(void)
 	GLfloat lightPosition[] = { 0.0, 0.0, 0.0, 1.0 };
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
 	
-	// render the solar system
+	//Renderiza o sistema solar
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
 
@@ -231,47 +217,29 @@ void display(void)
     }   
 	glDisable(GL_LIGHTING);
 
-	// possibly render orbits
-	/*if (showOrbits)
-		sistemaSolar.renderOrbits();*/
 	
 	glDisable(GL_DEPTH_TEST);
 
-	// set up ortho matrix for showing the UI (help dialogue)
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluOrtho2D(0.0, (GLdouble) telaLargura, (GLdouble) telaAltura, 0.0);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+		
 	
-	// draw the help dialogue
-	/*if (helpDialogue)
-	{
-		glBindTexture(GL_TEXTURE_2D, help->getTextureHandle());
-		glBegin(GL_QUADS);
-			glTexCoord2f(0.0f, 0.0f);	glVertex2f(0.0f, 0.0f);
-			glTexCoord2f(1.0f, 0.0f);	glVertex2f(512.0f, 0.0f);
-			glTexCoord2f(1.0f, 1.0f);	glVertex2f(512.0f, 512.0f);
-			glTexCoord2f(0.0f, 1.0f);	glVertex2f(0.0f, 512.0f);
-		glEnd();
-	}*/
-
 	glFlush();
 	glutSwapBuffers();
 }
 void keyDown(unsigned char key, int x, int y)
 {
-	// check for numerical keys
+	
+	
 	if (key > '0' && key <= '8'){
         // Volta à posição normal (inicial)    
         camera.visaoNormal();
+        camDeus = false;
             
-		// point at the specified planet
+		//Aponta para o planeta específico
 		float vec[3];
 		sistemaSolar.getPlanetPosition(key - '0', vec);
 		camera.pointAt(vec);
 
-		// select that planet
+		//Seleciona o planeta
 		planetSelected = key - '0';
 	}
     if (key == '9'){
@@ -280,71 +248,47 @@ void keyDown(unsigned char key, int x, int y)
         vec[0] = 0.1;
         vec[1] = 0.1;
         vec[2] = 0.1;
-        camera.visaoDeus();	    	
+        camera.visaoDeus();	
+        camDeus = true;    	
         camera.pointAt(vec);
     }
 	switch (key)
 	{
 	case '-':
-		velocidadeTempo /= 2.0f; // half the rate of time passing
+		velocidadeTempo /= 1.0f; 
 		break;
 	case '=':
-		velocidadeTempo *= 2.0f; // double the rate of time passing
+		velocidadeTempo *= 1.0f; 
 		break;
-	/*case 'h':
-		helpDialogue = !helpDialogue; // toggle the dialogue
-		break;*/
-	case '[':
-		//escalaTamanhoPlaneta /= 1.2; // make planet scale smaller
-		break;
-	case ']':
-		//escalaTamanhoPlaneta *= 1.2; // make planet scale bigger
-		break;
-	/*case 'o':
-		showOrbits = !showOrbits; // toggle show orbits
-		break;*/
-	case 'm':
-		addMoon(); // add a moon to the selected planet
-		break;
-	case 'r':
-		//escalaTamanhoPlaneta = escalaDistancia;
-		break;
-	case ',':
-		camera.slowDown(); // slow down camera
-		break;
-	case '.':
-		camera.speedUp(); // speed up camera
-		break;
-		// these are all camera controls
 	case 'w':
-		controls.forward = true;
+		if (!camDeus) controls.forward = true;
 		break;
 	case 's':
-		controls.backward = true;
+		if (!camDeus) controls.backward = true;
 		break;
 	case 'a':
-		controls.left = true;
+		if (!camDeus) controls.left = true;
 		break;
 	case 'd':
-		controls.right = true;
+		if (!camDeus) controls.right = true;
 		break;
 	case 'l':
-		controls.rollRight = true;
+		if (!camDeus) controls.rollRight = true;
 		break;
 	case 'j':
-		controls.rollLeft = true;
+		if (!camDeus) controls.rollLeft = true;
 		break;
 	case 'i':
-		controls.pitchDown = true;
+		if (!camDeus) controls.pitchDown = true;
 		break;
 	case 'k':
-		controls.pitchUp = true;
+		if (!camDeus) controls.pitchUp = true;
 		break;
 	case 'q':
-		controls.yawLeft = true;
+		if (!camDeus) controls.yawLeft = true;
 		break;
 	case 'e':
-		controls.yawRight = true;
+		if (!camDeus) controls.yawRight = true;
 		break;
 	}
 
@@ -413,7 +357,8 @@ int main(int argc, char** argv)
 void drawCube(void)
 {
 	glBegin(GL_QUADS);
-	// nova face
+	//Cubo do ambiente
+	//Face
 	glTexCoord2f(0.0f, 0.0f);	
 	glVertex3f(-1.0f, -1.0f, 1.0f);
 
@@ -426,7 +371,7 @@ void drawCube(void)
 	glTexCoord2f(0.0f, 1.0f);	
 	glVertex3f(-1.0f, 1.0f, 1.0f);
 
-	// nova face
+	//Face
 	glTexCoord2f(0.0f, 0.0f);	
 	glVertex3f(1.0f, 1.0f, 1.0f);
 
@@ -439,7 +384,7 @@ void drawCube(void)
 	glTexCoord2f(0.0f, 1.0f);	
 	glVertex3f(1.0f, -1.0f, 1.0f);
 
-	// nova face
+	//Face
 	glTexCoord2f(0.0f, 0.0f);	
 	glVertex3f(1.0f, 1.0f, -1.0f);
 
@@ -452,7 +397,7 @@ void drawCube(void)
 	glTexCoord2f(0.0f, 1.0f);	
 	glVertex3f(1.0f, -1.0f, -1.0f);
 
-	// nova face
+	//Face
 	glTexCoord2f(0.0f, 0.0f);	
 	glVertex3f(-1.0f, -1.0f, -1.0f);
 
@@ -465,7 +410,7 @@ void drawCube(void)
 	glTexCoord2f(0.0f, 1.0f);	
 	glVertex3f(-1.0f, 1.0f, -1.0f);
 
-	// nova face
+	//Face
 	glTexCoord2f(0.0f, 0.0f);	
 	glVertex3f(-1.0f, 1.0f, -1.0f);
 
@@ -478,7 +423,7 @@ void drawCube(void)
 	glTexCoord2f(0.0f, 1.0f);	
 	glVertex3f(-1.0f, 1.0f, 1.0f);
 
-	// nova face
+	//Face
 	glTexCoord2f(0.0f, 0.0f);	
 	glVertex3f(-1.0f, -1.0f, -1.0f);
 
