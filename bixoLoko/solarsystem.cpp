@@ -11,7 +11,7 @@ SolarSystem::SolarSystem()
 	
 }
 
-// calculate the positions and logic of all planets
+//calcula a posicao dos planetas
 void SolarSystem::calculatePositions(float time)
 {
 	for (int i = 0; i < planets.size(); i++)
@@ -19,24 +19,24 @@ void SolarSystem::calculatePositions(float time)
 		planets[i].calculatePosition(time);
 	}
 }
-// add nave
+// adiciona nave (como se fosse um planeta)
 void SolarSystem::addNave(float distanceFromSun, float orbitTime, float rotationTime, float radius, GLuint textureHandle){ 
     naves.push_back(Nave(distanceFromSun, orbitTime, rotationTime, radius, textureHandle));
 }
 
-// Add a planet with the given data
+// adiciona planeta
 void SolarSystem::addPlanet(float distanceFromSun, float orbitTime, float rotationTime, float radius, GLuint textureHandle)
 {
 	planets.push_back(Planet(distanceFromSun, orbitTime, rotationTime, radius, textureHandle));
 }
 
-// Add a moon to the specified planet
+// especifica qual planeta recebe a lua e a insere
 void SolarSystem::addMoon(int planetIndex, float distanceFromPlanet, float orbitTime, float rotationTime, float radius, GLuint textureHandle)
 {
 	planets[planetIndex].addMoon(distanceFromPlanet, orbitTime, rotationTime, radius, textureHandle);
 }
 
-// render the planets with opengl
+// renderizacao dos planetas
 void SolarSystem::render()
 {
 	for (int i = 0; i < planets.size(); i++)
@@ -44,7 +44,7 @@ void SolarSystem::render()
 		planets[i].render();
 	}
 }
-
+// renderizacao da nave
 void SolarSystem::renderNave(float * vec){
     for (int i = 0; i < naves.size(); i++){ 
         naves[i].render(vec);
@@ -52,7 +52,7 @@ void SolarSystem::renderNave(float * vec){
 }
 
 
-// render the drawing of the orbits
+// renderizacao das orbidas (linhas)
 void SolarSystem::renderOrbits()
 {
 	for (int i = 0; i < planets.size(); i++)
@@ -61,14 +61,14 @@ void SolarSystem::renderOrbits()
 	}
 }
 
-// get the position in 3d space units of the given planet (specified by its index in the list) and put it into the 3d vector vec
+// retorna posicao de um planeta (vetor)
 void SolarSystem::getPlanetPosition(int index, float* vec)
 {
 	planets[index].getPosition(vec);
 }
 
 
-// get the radius of the planet at the given index in the planets list
+// retorna o raio de um planeta
 float SolarSystem::getRadiusOfPlanet(int index)
 {
 	return planets[index].getRadius();
