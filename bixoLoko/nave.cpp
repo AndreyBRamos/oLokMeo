@@ -16,14 +16,14 @@
 #include "globals.h"
 #include "tga.h"
 
-// sets vec to (x,y,z)
+// seta um vetor(x,y,z)
 void vectorSeta(float* vec, float x, float y, float z)
 {
 	vec[0] = x;
 	vec[1] = y;
 	vec[2] = z;
 }
-// adds v2 to v1
+// vetor auxiliar para adicionar na posicao
 void vectorAdiciona(float* v1, float* v2)
 {
 	v1[0] += v2[0];
@@ -31,7 +31,7 @@ void vectorAdiciona(float* v1, float* v2)
 	v1[2] += v2[2];
 }
 
-// copies v2 into v1
+// vetor auxiliar
 void vectorCopia(float* v1, float* v2)
 {
 	v1[0] = v2[0];
@@ -39,14 +39,14 @@ void vectorCopia(float* v1, float* v2)
 	v1[2] = v2[2];
 }
 
-// multiplies vec by the scalar
+// vetor auxilar (escalar)
 void vectorMult(float* vec, float scalar)
 {
 	vec[0] *= scalar;
 	vec[1] *= scalar;
 	vec[2] *= scalar;
 }
-
+// Define textura, posicao, direcao, velocidade
 Nave::Nave(float distanceFromSun, float orbitTime, float rotationTime, float radius, GLuint textureHandle){
     this->distanceFromSun = distanceFromSun;
 	this->orbitTime = 0; //orbitTime;
@@ -61,7 +61,7 @@ Nave::Nave(float distanceFromSun, float orbitTime, float rotationTime, float rad
     naveTurnSpeed = 0.01f;
 }
 
-// Render it to the screen
+// renderiza
 void Nave::render(float* vec)
 {
 	glPushMatrix();
