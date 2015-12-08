@@ -23,12 +23,12 @@ See LICENSE.TXT*/
 
 float escalaTamanhoPlaneta = 0.000005f; // planetSizeScale
 
-Planet::Planet(float distanceFromSun, float orbitTime, float rotationTime, float radius, GLuint textureHandle)
+Planet::Planet(float distanciaSol, float orbitTime, float tempoRotacao, float raio, GLuint textureHandle)
 {
-	this->distanceFromSun = distanceFromSun;
+	this->distanciaSol = distanciaSol;
 	this->orbitTime = orbitTime;
-	this->rotationTime = rotationTime;
-	this->radius = radius;
+	this->tempoRotacao = tempoRotacao;
+	this->raio = raio;
 	this->textureHandle = textureHandle;
 }
 
@@ -39,12 +39,12 @@ void Planet::calculatePosition(float time)
 	float angle = time * 3.1419f / orbitTime;
 	
 	// use trig to find the position in space
-	position[0] = sin(angle) * distanceFromSun;
-	position[1] = cos(angle) * distanceFromSun;
+	position[0] = sin(angle) * distanciaSol;
+	position[1] = cos(angle) * distanciaSol;
 	position[2] = 0;
 
 	// find the rotation of the planet around its axis
-	rotation = time * 360 / rotationTime;
+	rotation = time * 360 / tempoRotacao;
 
 	// calculate positions of moons
 	for (int i = 0; i < moons.size(); i++)
@@ -59,7 +59,7 @@ void Planet::render(void)
 	glPushMatrix();
 
 	// translate to the right positon
-	glTranslatef(position[0] * distanceScale, position[1] * distanceScale, position[2] * distanceScale);
+	glTranslatef(position[0] * escalaDistancia, position[1] * escalaDistancia, position[2] * escalaDistancia);
 
 	// Draw the moons
 	for (int i = 0; i < moons.size(); i++)
@@ -78,43 +78,43 @@ void Planet::render(void)
 	gluQuadricTexture(quadric, true);
 	gluQuadricNormals(quadric, GLU_SMOOTH);
 
-	if (distanceFromSun < 0.001f) // if this is the sun, dont render it too big, and disable lighting
+	if (distanciaSol < 0.001f) // if this is the sun, dont render it too big, and disable lighting
 	{
-		float radiusScaled = radius * escalaTamanhoPlaneta;
-		if (radiusScaled > 0.5f) radiusScaled = 0.5f;
+		float escalaRaio = raio * escalaTamanhoPlaneta;
+		if (escalaRaio > 0.5f) escalaRaio = 0.5f;
 
 		glDisable(GL_LIGHTING);
-		gluSphere(quadric, radiusScaled, 30, 30);
+		gluSphere(quadric, escalaRaio, 30, 30);
 		glEnable(GL_LIGHTING);
 	}
 	else
 	{
-		gluSphere(quadric, radius * escalaTamanhoPlaneta, 30, 30);
+		gluSphere(quadric, raio * escalaTamanhoPlaneta, 30, 30);
 	}
 
 
 	glPopMatrix();
 }
 
-// render this planets orbit circle
+// renderiza a orbita dos planetas
 void Planet::renderOrbit(void)
 {
 	// draw a line strip
 	glBegin(GL_LINE_STRIP);
 
-	// loop round from 0 to 2*PI and draw around the radius of the orbit using trigonometry
+	// loop round from 0 to 2*PI and draw around the raio of the orbit using trigonometry
 	for (float angle = 0.0f; angle < 6.283185307f; angle += 0.05f)
 	{
-		glVertex3f(sin(angle) * distanceFromSun * distanceScale, cos(angle) * distanceFromSun * distanceScale, 0.0f);
+		glVertex3f(sin(angle) * distanciaSol * escalaDistancia, cos(angle) * distanciaSol * escalaDistancia, 0.0f);
 	}
-	glVertex3f(0.0f, distanceFromSun * distanceScale, 0.0f);
+	glVertex3f(0.0f, distanciaSol * escalaDistancia, 0.0f);
 	
 	glEnd();
 
 	// render the moons' orbit
 	glPushMatrix();
 	// translate to the center of this planet to draw the moon orbit around it
-	glTranslatef(position[0] * distanceScale, position[1] * distanceScale, position[2] * distanceScale);
+	glTranslatef(position[0] * escalaDistancia, position[1] * escalaDistancia, position[2] * escalaDistancia);
 	// draw all moon orbits
 	for (int i = 0; i < moons.size(); i++)
 	{
@@ -128,19 +128,19 @@ void Planet::renderOrbit(void)
 // Get its position in 3d world space units (after scaling) and put it into the 3d vector
 void Planet::getPosition(float* vec)
 {
-	vec[0] = position[0] * distanceScale;
-	vec[1] = position[1] * distanceScale;
-	vec[2] = position[2] * distanceScale;
+	vec[0] = position[0] * escalaDistancia;
+	vec[1] = position[1] * escalaDistancia;
+	vec[2] = position[2] * escalaDistancia;
 }
 
-// get the radius of this planet
+// get the raio of this planet
 float Planet::getRadius(void)
 {
-	return radius;
+	return raio;
 }
 
 // add a moon to this planet
-void Planet::addMoon(float distanceFromPlanet, float orbitTime, float rotationTime, float radius, GLuint textureHandle)
+void Planet::addMoon(float distanciaPlaneta, float orbitTime, float tempoRotacao, float raio, GLuint textureHandle)
 {
-	moons.push_back(Moon(distanceFromPlanet, orbitTime, rotationTime, radius, textureHandle));
+	moons.push_back(Moon(distanciaPlaneta, orbitTime, tempoRotacao, raio, textureHandle));
 }

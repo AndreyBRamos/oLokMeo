@@ -21,16 +21,16 @@ class Planet
 {
 private:
 	// distance from the sun
-	float distanceFromSun;
+	float distanciaSol;
 
 	// time it takes to complete 1 orbit
 	float orbitTime;
 
 	// time it takes to spin 360 degrees
-	float rotationTime;
+	float tempoRotacao;
 
-	// radius of the planet itself
-	float radius;
+	// raio of the planet itself
+	float raio;
 
 	// the texture used for rendering
 	GLuint textureHandle;
@@ -45,7 +45,7 @@ private:
 
 public:
 	// Distance is in units of km (kilometers) and time is in units of earth days (365.25 orbit time for earth)
-	Planet(float distanceFromSun, float orbitTime, float rotationTime, float radius, GLuint textureHandle);
+	Planet(float distanciaSol, float orbitTime, float tempoRotacao, float raio, GLuint textureHandle);
 
 	// Calculate its position in 3d spacein the orbit using the given time value
 	void calculatePosition(float time);
@@ -59,11 +59,11 @@ public:
 	// Get its position in 3d world space units (after scaling) and put it into the 3d vector
 	void getPosition(float* vec);
 
-	// get the radius of this planet
+	// get the raio of this planet
 	float getRadius(void);
 
 	// add a moon to this planet
-	void addMoon(float distanceFromPlanet, float orbitTime, float rotationTime, float radius, GLuint textureHandle);
+	void addMoon(float distanciaPlaneta, float orbitTime, float tempoRotacao, float raio, GLuint textureHandle);
 };
 
 #endif

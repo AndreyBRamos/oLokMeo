@@ -19,37 +19,37 @@ See LICENSE.TXT*/
 class Moon
 {
 private:
-	// distance from its planet
-	float distanceFromPlanet;
+	// distance para o planeta
+	float distanciaPlaneta;
 
-	// time it takes to complete 1 orbit
-	float orbitTime;
+	// tempo para a orbita
+	float tempoOrbita;
 
-	// time it takes to spin 360 degrees
-	float rotationTime;
+	// tempo de rotacao
+	float tempoRotacao;
 
-	// radius of the moon itself
-	float radius;
+	// raio da lua
+	float raio;
 
-	// the texture used for rendering
+	// textura para renderizar
 	GLuint textureHandle;
 
 	// its position in 3d space relative to the planet
 	float position[3];
-	// its rotation around its axis
-	float rotation;
+
+	// rotacao ao redor do eixo
+	float rotacao;
 
 public:
-	// Distance is in units of km (kilometers) and time is in units of earth days
-	Moon(float distanceFromPlanet, float orbitTime, float rotationTime, float radius, GLuint textureHandle);
+	// distancia em km, e tempo em dias da Terra
+	Moon(float distanciaPlaneta, float tempoOrbita, float tempoRotacao, float raio, GLuint textureHandle);
 
-	// Calculate its position in 3d space relative to the planet in the orbit using the given time value
-	void calculatePosition(float time);
+	// Calcula a posicao relativa ao tempo
+	void calculatePosition(float tempo);
 
-	// Render it to the screen
 	void render(void);
 
-	// render this moons orbit circle
+	// renderiza a orbita
 	void renderOrbit(void);
 };
 

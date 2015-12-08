@@ -307,7 +307,7 @@ void keyDown(unsigned char key, int x, int y)
 		addMoon(); // add a moon to the selected planet
 		break;
 	case 'r':
-		//escalaTamanhoPlaneta = distanceScale;
+		//escalaTamanhoPlaneta = escalaDistancia;
 		break;
 	case ',':
 		camera.slowDown(); // slow down camera
