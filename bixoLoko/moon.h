@@ -10,7 +10,7 @@
 class Moon
 {
 private:
-	// distance para o planeta
+	// distancia para o planeta
 	float distanciaPlaneta;
 
 	// tempo para a orbita
