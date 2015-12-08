@@ -11,48 +11,47 @@
 class Planet
 {
 private:
-	// distance from the sun
+	// distancia para o Sol
 	float distanciaSol;
 
-	// time it takes to complete 1 orbit
+	// tempo para completar uma orbita
 	float orbitTime;
 
-	// time it takes to spin 360 degrees
+	// tempo para cada grau de rotação ( 360)
 	float tempoRotacao;
 
-	// raio of the planet itself
+	// raio do planeta
 	float raio;
 
-	// the texture used for rendering
+	// textura para renderizar
 	GLuint textureHandle;
 
-	// its position in 3d space
+	// posição em 3d do planeta no espaço
 	float position[3];
 	// its rotation around its axis
 	float rotation;
 
-	// list of moons attached to this planet
+	// lista de luas do planeta
 	std::vector<Moon> moons;
 
 public:
-	// Distance is in units of km (kilometers) and time is in units of earth days (365.25 orbit time for earth)
+	// Distancia em km e tempo em dias ( Terra) 
 	Planet(float distanciaSol, float orbitTime, float tempoRotacao, float raio, GLuint textureHandle);
 
-	// Calculate its position in 3d spacein the orbit using the given time value
+	// Calcula a posição do espaço da orbita em relação ao tempo
 	void calculatePosition(float time);
 
-	// Render it to the screen
 	void render(void);
 
-	// render this planets orbit circle
+	// renderiza a orbita do planeta, por default esta off
 	void renderOrbit(void);
 
-	// Get its position in 3d world space units (after scaling) and put it into the 3d vector
+	// pega a posição do planeta apos a escala.
 	void getPosition(float* vec);
 
-	// get the raio of this planet
+	// pega o raio do planeta
 	float getRadius(void);
 
-	// add a moon to this planet
+	// adiciona lua aos planeta
 	void addMoon(float distanciaPlaneta, float orbitTime, float tempoRotacao, float raio, GLuint textureHandle);
 };
