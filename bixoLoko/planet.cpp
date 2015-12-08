@@ -16,7 +16,7 @@
 
 #include "globals.h"
 
-float escalaTamanhoPlaneta = 0.000005f; // planetSizeScale
+float escalaTamanhoPlaneta = 0.000005f;
 
 Planet::Planet(float distanciaSol, float orbitTime, float tempoRotacao, float raio, GLuint textureHandle)
 {
@@ -27,33 +27,32 @@ Planet::Planet(float distanciaSol, float orbitTime, float tempoRotacao, float ra
 	this->textureHandle = textureHandle;
 }
 
-// Calculate its position in 3d spacein the orbit using the given time value
+// Calcula a posição em 3d da orbita usando o tempo 
 void Planet::calculatePosition(float time)
 {
-	// find the angle of orientation of the orbit around the sun
+	// procura orientação da orbita em relação ao Sol
 	float angle = time * 3.1419f / orbitTime;
 	
-	// use trig to find the position in space
+	// usa para encontrar a posição no espaço
 	position[0] = sin(angle) * distanciaSol;
 	position[1] = cos(angle) * distanciaSol;
 	position[2] = 0;
 
-	// find the rotation of the planet around its axis
+	// encontra a rotação em relação ao planeta
 	rotation = time * 360 / tempoRotacao;
 
-	// calculate positions of moons
+	// calcula posição das luas
 	for (int i = 0; i < moons.size(); i++)
 	{
 		moons[i].calculatePosition(time);
 	}
 }
 
-// Render it to the screen
 void Planet::render(void)
 {
 	glPushMatrix();
 
-	// translate to the right positon
+	// translada para a posição correta
 	glTranslatef(position[0] * escalaDistancia, position[1] * escalaDistancia, position[2] * escalaDistancia);
 
 	// Draw the moons
@@ -62,18 +61,16 @@ void Planet::render(void)
 		moons[i].render();
 	}
 
-	/// rotate for the planet's spin
+	/// rotação em relação ao eixo do planeta
 	glRotatef(rotation, 0.0f, 0.0f, 1.0f);
 	
-	// bind the planets texture
 	glBindTexture(GL_TEXTURE_2D, textureHandle);
 	
-	// render as a GLU sphere quadric object
 	GLUquadricObj* quadric = gluNewQuadric();
 	gluQuadricTexture(quadric, true);
 	gluQuadricNormals(quadric, GLU_SMOOTH);
 
-	if (distanciaSol < 0.001f) // if this is the sun, dont render it too big, and disable lighting
+	if (distanciaSol < 0.001f)
 	{
 		float escalaRaio = raio * escalaTamanhoPlaneta;
 		if (escalaRaio > 0.5f) escalaRaio = 0.5f;
