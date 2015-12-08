@@ -1,3 +1,9 @@
+/*
+Desenvolvedores:
+Andrey B. Ramos
+Raffael C. Rossi
+Thiago Mendes
+*/
 
 // This scales down the distances of planets in the simulation. For example, if the scale is 0.00000001
 // and a planet is 149600000km from the sun, it will be drawn at 1.496 units in 3d space from the sun
