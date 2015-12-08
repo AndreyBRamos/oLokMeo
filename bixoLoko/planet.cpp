@@ -88,13 +88,13 @@ void Planet::render(void)
 	glPopMatrix();
 }
 
-// renderiza a orbita dos planetas
+// renderiza a orbita dos planetas, função esta desabilitada por default
 void Planet::renderOrbit(void)
 {
-	// draw a line strip
+	// desenha a linha da orbita
 	glBegin(GL_LINE_STRIP);
 
-	// loop round from 0 to 2*PI and draw around the raio of the orbit using trigonometry
+	// desenha o raio da orbita usando trigonometria
 	for (float angle = 0.0f; angle < 6.283185307f; angle += 0.05f)
 	{
 		glVertex3f(sin(angle) * distanciaSol * escalaDistancia, cos(angle) * distanciaSol * escalaDistancia, 0.0f);
@@ -103,9 +103,10 @@ void Planet::renderOrbit(void)
 	
 	glEnd();
 
-	// render the moons' orbit
+	// renderiza a orbita da lua
 	glPushMatrix();
-	// translate to the center of this planet to draw the moon orbit around it
+	
+	// translada o centro da orbita para o centro do planeta
 	glTranslatef(position[0] * escalaDistancia, position[1] * escalaDistancia, position[2] * escalaDistancia);
 	// draw all moon orbits
 	for (int i = 0; i < moons.size(); i++)
@@ -117,7 +118,7 @@ void Planet::renderOrbit(void)
 }
 
 
-// Get its position in 3d world space units (after scaling) and put it into the 3d vector
+// pega a posição após a escala
 void Planet::getPosition(float* vec)
 {
 	vec[0] = position[0] * escalaDistancia;
@@ -125,13 +126,13 @@ void Planet::getPosition(float* vec)
 	vec[2] = position[2] * escalaDistancia;
 }
 
-// get the raio of this planet
+// pega o raio do planeta
 float Planet::getRadius(void)
 {
 	return raio;
 }
 
-// add a moon to this planet
+// adiciona a lua ao planeta
 void Planet::addMoon(float distanciaPlaneta, float orbitTime, float tempoRotacao, float raio, GLuint textureHandle)
 {
 	moons.push_back(Moon(distanciaPlaneta, orbitTime, tempoRotacao, raio, textureHandle));
